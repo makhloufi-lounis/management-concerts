@@ -1,8 +1,6 @@
 # Management Concerts
-=======================
 
 ##Introduction
-------------
 Cette application est une simple application zend framework 2 qui permet de
 permet de consulter, filtrer et trier des concerts en fonction de plusieurs 
 paramètres.
