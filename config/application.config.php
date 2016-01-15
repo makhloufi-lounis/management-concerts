@@ -67,5 +67,16 @@ return array(
 
    // Initial configuration with which to seed the ServiceManager.
    // Should be compatible with Zend\ServiceManager\Config.
-   // 'service_manager' => array(),
+    'service_manager' => array(
+        'factories' => array(
+            'Zend\Log\Logger' => function($sm){
+                $logger = new Zend\Log\Logger;
+                $writer = new Zend\Log\Writer\Stream('./data/logs/'.date('Y-m-d').'-error.log');
+
+                $logger->addWriter($writer);
+
+                return $logger;
+            },
+        ),
+    ),
 );
