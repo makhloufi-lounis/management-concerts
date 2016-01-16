@@ -1,0 +1,93 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %} Accueil {% endblock title %}
+
+{% block content %}
+<h2 class="h2 concert-list">Parcourir les concerts à venir</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="bar-nav">
+            <form action="/ajax-request" class="form-inline" id="send">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default" aria-label="Left Align" id="submit">
+                        <span class="glyphicon glyphicon-search"><br/> Filtrer les concerts</span>
+                    </button>
+                </div>
+                <div class="form-group">
+                    <select name="city" class="select">
+                        <option selected disabled>Ville</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="tags" class="select">
+                        <option selected disabled>Tags</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="price" class="select">
+                        <option selected disabled>Prix</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <span class="label-option"> Entre le </span>
+                    <select name="date_start" class="select">
+                        <option selected disabled>Date</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <span class="label-option"> et le </span>
+                    <select name="date_end" class="select" >
+                        <option selected disabled>Date</option>
+
+                    </select>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="next-concerts">
+        <!--@foreach ($concerts as $concert)-->
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong class="small-size">  </strong>
+                    <br/>
+                </div>
+                <div class="panel-body">
+                    <img src=""width="330" height="200">
+                </div>
+                <div class="panel-footer">
+                    <div class="span6 pull-left"></div>
+                    <div class="span6 pull-right">Prix : <strong class="label-option"></strong></div>
+                    <br/>
+                    <div class="span6 pull-left"></div>
+                    <div class="span6 pull-right">
+                        <a href="/detail-concert?concert=<?php echo $concert->id_concert; ?>&artiste=<?php echo $concert->id_artiste; ?>">
+                            Voir le détails>
+                        </a>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+        <!--@endforeach-->
+
+        <div class="home">
+            <div class="text-center">
+            </div>
+        </div>
+     </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+
+{% endblock script %}

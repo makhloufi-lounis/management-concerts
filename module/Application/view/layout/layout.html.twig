@@ -1,0 +1,45 @@
+{{ docType() }}
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>
+        {% block title %} news concerts {% endblock title %}
+    </title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% block meta %}{% endblock meta %}
+
+
+    <link href="{{ basePath() }}/css/style.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{ basePath() }}/css/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{ basePath() }}/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{ basePath() }}/css/global.css" media="screen" rel="stylesheet" type="text/css">
+    {% block style %}{% endblock style %}
+
+</head>
+<body>
+{% block header %}
+        <div class="container">
+            <div class="page-header">
+                <img src="{{basePath()}}/img/logo.png">
+            </div>
+        </div>
+{% endblock header %}
+<div class="container">
+    {% block content %}{{ content|raw }}{% endblock content %}
+    <footer id="last">
+        <ul id="copyright">
+            <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </footer>
+</div> <!-- /container -->
+{% block inline %}{% endblock inline %}
+
+<!-- Scripts -->
+<script type="text/javascript" src="{{ basePath() }}/js/jquery.min.js"></script>
+<script type="text/javascript" src="{{ basePath() }}/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ basePath() }}/js/html5shiv.min.js"></script>
+{% block script %}{% endblock script %}
+</body>
+</html>
