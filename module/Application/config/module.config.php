@@ -45,6 +45,35 @@ return array(
                     ),
                 ),
             ),
+            'detail' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/detail[/:action][/:id][/:param]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                        'param' => '[a-zA-Z]',
+                    ),
+                    'defaults' => array(
+                        'controller'    => 'Application\Controller\Concert',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
+            'ajax' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/ajax-request[/:action][/:param]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'param' => '.*',
+                    ),
+                    'defaults' => array(
+                        'controller'    => 'Application\Controller\Ajax',
+                        'action'        => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -68,7 +97,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Site' => Controller\SiteController::class
+            'Application\Controller\Site' => Controller\SiteController::class,
+            'Application\Controller\Concert' => 'Application\Controller\ConcertController',
+            'Application\Controller\Ajax' => 'Application\Controller\AjaxController'
         ),
     ),
     'view_manager' => array(
@@ -80,6 +111,8 @@ return array(
         'template_map' => array(
             'layout/layout'           => __DIR__ . '/../view/layout/layout.html.twig',
             'application/site/index' => __DIR__ . '/../view/application/site/homepage.html.twig',
+            'application/concert/show' => __DIR__ . '/../view/application/site/detail-concert.html.twig',
+            'application/ajax/filter' => __DIR__ . '/../view/application/site/filter.html.twig',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
@@ -94,4 +127,5 @@ return array(
             ),
         ),
     ),
+
 );

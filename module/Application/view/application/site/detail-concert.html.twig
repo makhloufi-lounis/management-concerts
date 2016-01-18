@@ -1,0 +1,119 @@
+
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %} Détail de concert {% endblock title %}
+
+{% block content %}
+    <div class="contents">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+
+                        <div class="span8 pull-left label-option" id="top">
+                            {{concert.name}} @ {{concert.place}}-{{concert.city}}
+                        </div>
+                        <div class="span6 pull-right">
+                            <a href="{{ url('home') }}" class="label-option link"> Retour à la liste des concerts </a>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="panel-body">
+                        <img src="{{ basePath() }}/img/{{ concert.image }}" alt="{{ concert.image }}" width="720" height="400">
+                    </div>
+                    <div class="panel-footer">
+                        <div>
+                            <p>
+                                {{concert.description}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="label-option"> Vidéo de l'artiste </h2>
+                        <br/>
+                    </div>
+                    <div class="panel-body">
+                        <div class="video">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="bottom">
+                    <div class="span6 pull-left">
+                        <a  href="{{ url('home') }}" class="label-option link">
+                            <span>< Retour à la liste des concerts</span>
+                        </a>
+                    </div>
+                    <div class="span6 pull-right">
+                        <a href="#top" class="label-option link">
+                            Retour en haut de page
+                        </a>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <h2 class="label-option order-title"> Pré-commandez </h2>
+                    <div class="panel-body">
+                        <div class="detail-event">
+                            <p class="label-option ">
+                                Commandez votre place pour le concert de <br/>
+                                <span class="artist-name">{{concert.name}}</span>
+                            </p>
+                            <p class="detail-artist">
+                            <div class="span6 pull-left label-option">Date:</div>
+                            <div class="span6 pull-right label-option">
+                                <span id="day"> {{concert.date_concert}} </span>
+                            </div>
+                            </p>
+                            <br/>
+                            <p class="detail-artist">
+                            <div class="span6 pull-left label-option">Lieu:</div>
+                            <div class="span6 pull-right label-option">
+                                <span id="place">{{concert.place}}</span>
+                            </div>
+                            </p>
+                            <br/>
+                            <p class="detail-artist">
+                            <div class="span6 pull-left label-option">Adresse:</div>
+                            <div class="span6 pull-right label-option">
+                                <span id="address">{{concert.address}}</span>
+                            </div>
+                            </p>
+                            <br/>
+                            <p class="detail-artist">
+                            <div class="span6 pull-left label-option">Ville:</div>
+                            <div class="span6 pull-right label-option">
+                                <span id="city">{{concert.city}} </span>
+                            </div>
+                            </p>
+                            <br/>
+                            <div id="map_canvas">
+
+                            </div>
+                            <br/>
+                            <div class="text-center btn-order">
+                                <button type="button" class="btn btn-default btn-lg">
+                                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Pré-commandez
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="{{ basePath() }}/js/detail-concert.js"></script>
+
+{% endblock script %}
+

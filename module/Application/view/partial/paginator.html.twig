@@ -1,0 +1,79 @@
+
+{% if pageCount is not empty %}
+
+        <div>
+            <ul class="pagination">
+                <!-- first page link -->
+                {% if previous is defined %}
+                    <li>
+                        <a href="#">
+                            <<
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#">
+                            <<
+                        </a>
+                    </li>
+                {% endif %}
+                <!-- Previous page link -->
+                {% if previous is defined %}
+                    <li>
+                        <a href="#">
+                            <
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#">
+                            <
+                        </a>
+                    </li>
+                {% endif %}
+                <!-- Numbered page links -->
+                {% for page in pagesInRange %}
+                    {% if page != current %}
+                        <li>
+                            <a href="#">
+                                <?php echo $page; ?>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="active">
+                            <a href="#"><?php echo $page; ?></a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Next page link -->
+                {% if next is defined %}
+                    <li>
+                        <a href="#">
+                            >
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="disabled">
+                        <a href="#">
+                            >
+                        </a>
+                    </li>
+                    {% endif %}
+                <!-- last page link -->
+                    {% if next is defined %}
+                    <li>
+                        <a href="#">
+                            >>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="disabled">
+                        <a href="#">
+                            >>
+                        </a>
+                    </li>
+                    {% endif %}
+            </ul>
+        </div>
+{% endif %}

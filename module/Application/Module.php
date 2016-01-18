@@ -1,16 +1,15 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Application\Model\Artist;
+use Application\Model\ArtistTable;
+use Application\Model\Concert;
+use Application\Model\ConcertTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module
 {
@@ -36,4 +35,37 @@ class Module
             ),
         );
     }
+
+    public function getServiceConfig()
+    {
+        return array(
+
+            'factories' => array(
+                'Application\Model\ArtistTable' =>  function($sm) {
+                    $tableGateway = $sm->get('ArtistTableGateway');
+                    $table = new ArtistTable($tableGateway);
+                    return $table;
+                },
+                'ArtistTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Artist());
+                    return new TableGateway('artists', $dbAdapter, null, $resultSetPrototype);
+                },
+                'Application\Model\ConcertTable' =>  function($sm) {
+                    $tableGateway = $sm->get('ConcertTableGateway');
+                    $table = new ConcertTable($tableGateway);
+                    return $table;
+                },
+                'ConcertTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Concert());
+                    return new TableGateway('concerts', $dbAdapter, null, $resultSetPrototype);
+                },
+            ),
+        );
+    }
+
+
 }

@@ -4,90 +4,116 @@
 
 {% block content %}
 <h2 class="h2 concert-list">Parcourir les concerts à venir</h2>
-<div class="row">
-    <div class="col-md-12">
-        <div class="bar-nav">
-            <form action="/ajax-request" class="form-inline" id="send">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default" aria-label="Left Align" id="submit">
-                        <span class="glyphicon glyphicon-search"><br/> Filtrer les concerts</span>
-                    </button>
+    {% if flashMessages is iterable %}
+        {% for msg in flashMessages %}
+            <div class="error">
+                <p> <em>{{ msg }}!</em> </p>
+            </div>
+
+        {% endfor %}
+    {% else %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="bar-nav">
+                    <form action="/ajax-request/filter" class="form-inline" id="send">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default" aria-label="Left Align" id="submit">
+                                <span class="glyphicon glyphicon-search"><br/> Filtrer les concerts</span>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <select name="city" class="select">
+                                <option selected disabled>Ville</option>
+                                {% for city in towns %}
+                                    <option value="{{city}}">{{city}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="tags" class="select">
+                                <option selected disabled>Tags</option>
+                                {% for tag in tags %}
+                                    <option value="{{tag}}">{{tag}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select name="cost" class="select">
+                                <option selected disabled>Prix</option>
+                                {% for cost in costs %}
+                                    <option value="{{cost}}">{{cost}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <span class="label-option"> Entre le </span>
+                            <select name="date_start" class="select">
+                                <option selected disabled>Date</option>
+                                {% for day in days %}
+                                    <option value="{{day}}">{{day}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <span class="label-option"> et le </span>
+                            <select name="date_end" class="select" >
+                                <option selected disabled>Date</option>
+                                {% for day in days %}
+                                    <option value="{{day}}">{{day}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </form>
+
                 </div>
-                <div class="form-group">
-                    <select name="city" class="select">
-                        <option selected disabled>Ville</option>
-
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select name="tags" class="select">
-                        <option selected disabled>Tags</option>
-
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select name="price" class="select">
-                        <option selected disabled>Prix</option>
-
-                    </select>
-                </div>
-                <div class="form-group">
-                    <span class="label-option"> Entre le </span>
-                    <select name="date_start" class="select">
-                        <option selected disabled>Date</option>
-
-                    </select>
-                </div>
-                <div class="form-group">
-                    <span class="label-option"> et le </span>
-                    <select name="date_end" class="select" >
-                        <option selected disabled>Date</option>
-
-                    </select>
-                </div>
-
-            </form>
-
+            </div>
         </div>
-    </div>
-</div>
-<br/>
-<div class="row">
-    <div class="next-concerts">
-        <!--@foreach ($concerts as $concert)-->
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong class="small-size">  </strong>
-                    <br/>
-                </div>
-                <div class="panel-body">
-                    <img src=""width="330" height="200">
-                </div>
-                <div class="panel-footer">
-                    <div class="span6 pull-left"></div>
-                    <div class="span6 pull-right">Prix : <strong class="label-option"></strong></div>
-                    <br/>
-                    <div class="span6 pull-left"></div>
-                    <div class="span6 pull-right">
-                        <a href="/detail-concert?concert=<?php echo $concert->id_concert; ?>&artiste=<?php echo $concert->id_artiste; ?>">
-                            Voir le détails>
-                        </a>
+        <br/>
+        <div class="row">
+            <div class="next-concerts">
+                {% for concert in paginator %}
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong class="small-size"> {{concert.name}} @ {{concert.place}}-{{concert.city}} </strong>
+                            <br/>
+                        </div>
+                        <div class="panel-body">
+                            <img src="{{ basePath() }}/img/{{ concert.image }}" alt="{{ concert.image }}" width="330" height="200">
+                        </div>
+                        <div class="panel-footer">
+                            <div class="span6 pull-left"> {{concert.date_concert}} </div>
+                            <div class="span6 pull-right">Prix : <strong class="label-option">{{concert.cost}},00 &euro;</strong></div>
+                            <br/>
+                            <div class="span6 pull-left">{{concert.tags}}</div>
+                            <div class="span6 pull-right">
+                                <a href="{{ url('detail') }}/show/{{ concert.id }}">
+                                    Voir le détails>
+                                </a>
+                            </div>
+                            <br/>
+                        </div>
                     </div>
-                    <br/>
                 </div>
-            </div>
-        </div>
-        <!--@endforeach-->
+                {% endfor %}
 
-        <div class="home">
-            <div class="text-center">
+                <div class="home">
+                    <div class="text-center">
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    {{ paginationControl(paginator, 'sliding', {0 : 'partial/paginator.phtml', 1 : 'Logboek'}, {'route' : 'home'}) }}
+                </div>
+
             </div>
         </div>
-     </div>
-</div>
+
+    {% endif %}
+
 {% endblock content %}
 
 {% block script %}
-
+    <script type="text/javascript" src="{{ basePath() }}/js/filter.js"></script>
 {% endblock script %}

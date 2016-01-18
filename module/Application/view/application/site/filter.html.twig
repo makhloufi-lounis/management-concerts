@@ -1,0 +1,27 @@
+{% for concert in concerts %}
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong class="small-size"> {{concert.name}} @ {{concert.place}}-{{concert.city}} </strong>
+                <br/>
+            </div>
+            <div class="panel-body">
+                <img src="{{ basePath() }}/img/{{ concert.image }}" alt="{{ concert.image }}" width="330" height="200">
+            </div>
+            <div class="panel-footer">
+                <div class="span6 pull-left"> {{concert.date_concert}} </div>
+                <div class="span6 pull-right">Prix : <strong class="label-option">{{concert.cost}},00 &euro;</strong></div>
+                <br/>
+                <div class="span6 pull-left">{{concert.tags}}</div>
+                <div class="span6 pull-right">
+                    <a href="{{ url('detail') }}/show/{{ concert.id }}">
+                        Voir le détails>
+                    </a>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+

@@ -24,4 +24,9 @@ return array(
     'paths' => array(
         'logDir' => $_SERVER['DOCUMENT_ROOT'] .'/../data/logs/',
     ),
+    'http_client' => array(
+        'options' => array(
+            'sslcapath' => '/etc/ssl/certs',
+        ),
+    ),
 );
