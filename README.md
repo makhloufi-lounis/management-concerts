@@ -48,7 +48,7 @@ Configurer l'application avec vos propres infos dans le fichier
 
 ### B.2 - Installation de Zend Framework 2
 
-Pour installer Zend Framework 2 dans votre application, utiliser composer comme
+Pour installer Zend Framework 2 dans l'application, utiliser composer comme
 ci-dessous:
 
         - php composer.phar self-update
@@ -56,8 +56,8 @@ ci-dessous:
 
 ### B.3 - configuration Apache
 
-la configuration d'un hôte virtuel pour pointer vers le répertoire / public
-du projet devra etre comme ci-dessous:
+La configuration d'un hôte virtuel pour pointer vers le répertoire / public
+du projet devra ressembler au modele ci-dessous:
 
     <VirtualHost *:80>
         ServerName www.news-concert.com
@@ -73,7 +73,7 @@ du projet devra etre comme ci-dessous:
 
 ### B.2 - configuration de API YOUTUBE
 
-il faut utiliser votre propre key API dans le script js:
+Il faut utiliser votre propre key API dans le script js:
 
         -(public/js/detail-concert.js - ligne 49)
 
