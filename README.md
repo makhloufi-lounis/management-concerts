@@ -29,17 +29,11 @@ concert, divisé en deux colonnes.
 La première colonne montre les informations de l'artiste, dont son nom, son
 image de couverture, sa déscription.
 Une vidéo récupérée via l'API Youtube sera aussi affichée.
-Le détail de la récupération de la vidéo et de l'utilisation de l'API Youtube
-est fourni dans la section III.
 
 La seconde colonne quant à elle affichera le détail de l'évènement, dont sa
 date, le nom du lieu, l'adresse et la Ville.
-Une carte Google Map récupérée à partir de l'API Google Maps devra aussi être
-affichée.
+Une carte Google Map récupérée à partir de l'API Google Maps est affichée.
 
-Important : Le bouton "Pré-commander" ne fonctionnera pas, et n'est présent que
-pour que la page soit complète. Mais bien évidemment, il ne faudra pas
-implémenter de système de commande !
 
 ## B - Installation de l'application
 
