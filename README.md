@@ -43,10 +43,14 @@ implémenter de système de commande !
 
 ## B - Installation de l'application
 
-### B.1 - L'import de la base de données
+### B.1 - Configuration de la base de données
 
 Il vous faudra importer la base de données contenues dans le dossier resources
 disponible a la racine du projet
+
+Configurer l'application avec vos propres infos dans le fichier
+
+        - config/autoload/local.php
 
 ### B.2 - Installation de Zend Framework 2
 
@@ -78,7 +82,7 @@ du projet devra etre comme ci-dessous:
 il faut utiliser votre propre key API dans le script js:
 
         -(public/js/detail-concert.js - ligne 49)
-        
+
 pour la recuperation des videos d'artistes
 
 
